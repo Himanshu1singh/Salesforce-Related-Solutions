@@ -1,0 +1,3 @@
+System.URL orgDomainUrl = System.URL.getOrgDomainUrl();
+String baseUrl = orgDomainUrl.toExternalForm();
+System.debug('baseUrl ------>>>>'+ baseUrl);
