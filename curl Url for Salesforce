@@ -1,4 +1,34 @@
-curl -X POST \
-  https://login.salesforce.com/services/oauth2/token \ // Base URL of ORG 
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'grant_type=password&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&username=YOUR_USERNAME&password=YOUR_PASSWORD_SECURITY_TOKEN
+// ****************************************************  Hit connected ORG to Create Data  ******************************************************************************************
+
+	curl https://applicationhouse-dev-ed.my.salesforce.com/services/data/v61.0/sobjects/Account/ \
+	-H "Authorization: Bearer 'token'" \
+	-H "Content-Type: application/json" 
+	-d "@newaccount.json"   //  JSON like 	{
+												"Name" : "Express Logistics and Transport"
+											}
+
+// ******************************************************  Get Access Token using Refresh Token  ************************************************************************************
+
+curl -X POST https://login.salesforce.com/services/oauth2/token \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "grant_type=refresh_token" \
+     -d "client_id='client_id'" \
+     -d "client_secret='client_secret'" \
+     -d "refresh_token='refresh_token'"
+	 
+// ***************************************************************  Get Refresh Token  **********************************************************************************************
+
+curl -X POST https://login.salesforce.com/services/oauth2/token \
+	  -H 'Content-Type: application/x-www-form-urlencoded' \
+	  -d 'grant_type=password' \
+	  -d 'client_id=YOUR_CLIENT_ID' \
+	  -d 'client_secret=YOUR_CLIENT_SECRET' \
+	  -d 'username=YOUR_SALESFORCE_USERNAME' \
+	  -d 'password=YOUR_SALESFORCE_PASSWORDYOUR_SECURITY_TOKEN'
+	
+// ***********************************************************  Get Auth Code in salesforce  ***************************************************************************************
+
+	https://login.salesforce.com/services/oauth2/authorize
+	?response_type=code
+	&client_id=YOUR_CLIENT_ID
+	&redirect_uri=YOUR_REDIRECT_URI
